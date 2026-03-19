@@ -1,8 +1,12 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
+set -e
 # macOS 시스템 기본값 설정 (darwin 전용)
 
 echo "macOS 기본값 설정 중..."
+
+# System Settings 종료 (설정 충돌 방지)
+osascript -e 'tell application "System Settings" to quit' 2>/dev/null || true
 
 # ── Dock ──────────────────────────────────────────────────────────────────────
 defaults write com.apple.dock tilesize -int 62
@@ -54,8 +58,10 @@ defaults write com.apple.menuextra.clock ShowDate -bool false
 defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
 
 # ── 변경사항 적용 ─────────────────────────────────────────────────────────────
-killall Dock Finder
+killall Dock 2>/dev/null || true
+killall Finder 2>/dev/null || true
+killall SystemUIServer 2>/dev/null || true
 
-echo "macOS 기본값 설정 완료."
+echo "macOS 기본값 설정 완료. 일부 설정은 재로그인 또는 재시작 후 적용됩니다."
 
 {{ end -}}
