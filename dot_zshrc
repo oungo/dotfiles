@@ -37,6 +37,8 @@ ff() {
 gd() {
   git diff "${1:-master}..HEAD" "${@:2}" ":(exclude)package-lock.json" ":(exclude)*.lock"
 }
+gwa() { git worktree add -b "$1" "../$1"; }
+gwr() { git worktree remove "../$1" && git branch -D "$1"; }
 
 export EDITOR=/opt/homebrew/bin/nvim
 
