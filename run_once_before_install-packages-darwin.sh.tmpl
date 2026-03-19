@@ -1,0 +1,52 @@
+# MacOS 에서만 실행
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+PACKAGES=(
+    bat
+    chezmoi
+    coreutils
+    curl
+    fnm
+    fzf
+    gh
+    git
+    git-lfs
+    gnupg
+    mise
+    neovim
+    ripgrep
+    starship
+    yarn
+    zoxide
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
+
+CASKS=(
+    font-hack-nerd-font
+    ghostty
+    karabiner-elements
+)
+
+# Homebrew가 없으면 설치
+if test ! $(which brew); then
+    printf '\n\n\e[33mHomebrew not found. \e[0mInstalling Homebrew...'
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+else
+    printf '\n\n\e[0mHomebrew found. Continuing...'
+fi
+
+printf '\nInitiating Homebrew update...\n'
+brew update
+
+printf '\nInstalling packages...\n'
+brew install ${PACKAGES[@]}
+
+printf '\n\nRemoving out of date packages...\n'
+brew cleanup
+
+printf '\n\nInstalling cask apps...\n'
+brew install --cask ${CASKS[@]}
+
+{{ end -}}
