@@ -1,0 +1,71 @@
+# Zsh 옵션
+setopt AUTO_CD
+
+# Completion 시스템 초기화
+autoload -Uz compinit && compinit
+
+alias c="claude"
+# Aliases
+alias vim="nvim"
+alias vi="nvim"
+
+# Git aliases
+alias gst="git status"
+alias gsta="git stash"
+alias gstp="git stash pop"
+alias gstl="git stash list"
+alias gstd="git stash drop"
+alias gp="git push"
+alias gpf!="git push --force"
+alias glog="git log --oneline --decorate --graph"
+alias gloga="git log --oneline --decorate --graph --all"
+alias gco="git checkout"
+alias gcb="git checkout -b"
+alias gcmsg="git commit -m"
+alias gl="git pull"
+alias grbi="git rebase -i"
+
+fs() {
+ rg "" --line-number | fzf \
+    --delimiter ':' \
+    --preview 'bat --color=always --highlight-line {2} {1}' \
+    --preview-window '+{2}-/2'
+}
+ff() {
+ fzf --preview 'bat --color=always {}'
+}
+gd() {
+  git diff "${1:-master}..HEAD" "${@:2}" ":(exclude)package-lock.json" ":(exclude)*.lock"
+}
+
+export EDITOR=/opt/homebrew/bin/nvim
+
+# iTerm2 integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# fzf
+source <(fzf --zsh)
+
+# Starship prompt
+eval "$(starship init zsh)"
+
+# zoxide (smart cd)
+eval "$(zoxide init zsh)"
+
+# fnm (node version manager)
+eval "$(fnm env --use-on-cd)"
+
+# Autosuggestions
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Syntax highlighting (반드시 마지막에 로드)
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Claude Code aliases
+alias c='claude'
