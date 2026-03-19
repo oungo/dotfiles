@@ -1,0 +1,21 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+set -e
+# 앱 설정 복원 (darwin 전용)
+
+echo "앱 설정 복원 중..."
+
+# ── BetterTouchTool 프리셋 import ─────────────────────────────────────────────
+BTT_PRESET="$HOME/.config/btt/btt-default.bttpreset"
+
+if [ -f "$BTT_PRESET" ]; then
+    echo "BetterTouchTool 프리셋 import 중..."
+    open -a "BetterTouchTool" "$BTT_PRESET" 2>/dev/null || true
+    echo "BTT 프리셋 import 완료. BTT에서 확인하세요."
+else
+    echo "BTT 프리셋 파일 없음: $BTT_PRESET"
+fi
+
+echo "앱 설정 복원 완료."
+
+{{ end -}}

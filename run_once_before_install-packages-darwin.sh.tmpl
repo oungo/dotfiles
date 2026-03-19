@@ -10,6 +10,7 @@ PACKAGES=(
     fzf
     gh
     git
+    mas
     neovim
     ripgrep
     starship
@@ -20,9 +21,14 @@ PACKAGES=(
 )
 
 CASKS=(
+    bettertouchtool
     font-hack-nerd-font
     ghostty
     karabiner-elements
+)
+
+MAS_APPS=(
+    "441258766"  # Magnet
 )
 
 # Homebrew가 없으면 설치
@@ -44,6 +50,11 @@ brew cleanup
 
 printf '\n\nInstalling cask apps...\n'
 brew install --cask ${CASKS[@]}
+
+printf '\n\nInstalling App Store apps...\n'
+for app_id in "${MAS_APPS[@]}"; do
+    mas install "$app_id"
+done
 
 # SpaceVim 설치
 if [ ! -d "$HOME/.SpaceVim" ]; then
