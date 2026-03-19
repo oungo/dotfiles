@@ -1,0 +1,61 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+# macOS 시스템 기본값 설정 (darwin 전용)
+
+echo "macOS 기본값 설정 중..."
+
+# ── Dock ──────────────────────────────────────────────────────────────────────
+defaults write com.apple.dock tilesize -int 62
+defaults write com.apple.dock mru-spaces -bool false
+defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
+
+# 핫코너: 왼쪽 하단 = 화면 보호기 (5), 오른쪽 하단 = 빠른 메모 (14)
+defaults write com.apple.dock wvous-bl-corner -int 5
+defaults write com.apple.dock wvous-bl-modifier -int 0
+defaults write com.apple.dock wvous-br-corner -int 14
+
+# ── NSGlobalDomain ────────────────────────────────────────────────────────────
+# 파일 확장자 항상 표시
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+# 탭으로 UI 컨트롤 이동
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
+# 자동 교정 기능 끄기
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# ── 트랙패드 ──────────────────────────────────────────────────────────────────
+# 탭하여 클릭
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+# 세 손가락 드래그
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+# 세 손가락 스와이프 끄기 (드래그와 충돌 방지)
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 0
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0
+
+# ── 스크린샷 ──────────────────────────────────────────────────────────────────
+defaults write com.apple.screencapture style selection
+
+# ── Window Manager ────────────────────────────────────────────────────────────
+defaults write com.apple.WindowManager EnableTilingByEdgeDrag -bool false
+defaults write com.apple.WindowManager EnableTopTilingByEdgeDrag -bool false
+defaults write com.apple.WindowManager HideDesktop -bool true
+
+# ── 메뉴바 시계 ───────────────────────────────────────────────────────────────
+defaults write com.apple.menuextra.clock ShowAMPM -bool true
+defaults write com.apple.menuextra.clock ShowDate -bool false
+defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+
+# ── 변경사항 적용 ─────────────────────────────────────────────────────────────
+killall Dock Finder
+
+echo "macOS 기본값 설정 완료."
+
+{{ end -}}
