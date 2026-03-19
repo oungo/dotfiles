@@ -45,4 +45,12 @@ brew cleanup
 printf '\n\nInstalling cask apps...\n'
 brew install --cask ${CASKS[@]}
 
+# SpaceVim 설치
+if [ ! -d "$HOME/.SpaceVim" ]; then
+    printf '\n\nInstalling SpaceVim...\n'
+    curl -sLf https://spacevim.org/install.sh | bash
+else
+    printf '\n\nSpaceVim already installed. Skipping...\n'
+fi
+
 {{ end -}}
