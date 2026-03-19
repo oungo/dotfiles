@@ -1,9 +1,20 @@
 # dotfiles
 
-## 설치
+## 새 맥 설정
+
+### 사전 준비
+1. App Store 로그인 (Magnet 설치에 필요)
+
+### 설치
+
+chezmoi가 없는 경우:
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/oungo/dotfiles/master/bootstrap.sh)"
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply oungo
 ```
 
-brew, 패키지, SpaceVim, dotfile이 자동으로 설치됩니다.
+chezmoi가 이미 설치된 경우:
+
+```bash
+chezmoi init --apply oungo
+```
