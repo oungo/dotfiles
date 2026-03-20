@@ -1,0 +1,62 @@
+gui:
+  theme:
+    activeBorderColor:
+      - green
+      - bold
+    inactiveBorderColor:
+      - white
+    optionsTextColor:
+      - blue
+    selectedLineBgColor:
+      - blue
+    selectedRangeBgColor:
+      - blue
+    cherryPickedCommitBgColor:
+      - cyan
+    cherryPickedCommitFgColor:
+      - blue
+    unstagedChangesColor:
+      - red
+    defaultFgColor:
+      - default
+  showIcons: true
+  nerdFontsVersion: "3"
+  language: "en"
+  timeFormat: "2006-01-02 15:04"
+  shortTimeFormat: "15:04"
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+  commit:
+    signOff: false
+  merging:
+    manualCommit: false
+  log:
+    order: "topo-order"
+    showGraph: "always"
+  autoFetch: true
+  autoRefresh: true
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
+
+os:
+  edit: "nvim"
+  editAtLine: "nvim +{{line}} {{filename}}"
+  editAtLineAndWait: "nvim +{{line}} {{filename}}"
+  openLink: "open {{link}}"
+
+keybinding:
+  universal:
+    quit: "q"
+    return: "<esc>"
+    nextItem: "j"
+    prevItem: "k"
+    nextPage: "<c-d>"
+    prevPage: "<c-u>"
+    scrollLeft: "H"
+    scrollRight: "L"
+    createRebaseOptionsMenu: "m"
+  commits:
+    moveDownCommit: "<c-j>"
+    moveUpCommit: "<c-k>"
