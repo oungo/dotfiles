@@ -2,12 +2,14 @@
 setopt AUTO_CD
 
 # Completion 시스템 초기화
-autoload -Uz compinit && compinit
+autoload -Uz compinit & compinit
 
 alias c="claude"
 # Aliases
 alias vim="nvim"
 alias vi="nvim"
+
+alias lg="lazygit"
 
 # Git aliases
 alias gst="git status"
