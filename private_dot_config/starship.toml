@@ -57,9 +57,6 @@ symbol = " "
 [git_branch]
 symbol = " "
 
-
-[git_status]
-use_git_executable = true
 [git_commit]
 tag_symbol = '  '
 

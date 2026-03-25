@@ -2,7 +2,7 @@
 setopt AUTO_CD
 
 # Completion 시스템 초기화
-autoload -Uz compinit & compinit
+autoload -Uz compinit && compinit
 
 alias c="claude"
 # Aliases
@@ -68,6 +68,8 @@ eval "$(fnm env --use-on-cd)"
 # Autosuggestions
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# Work 환경 설정
+test -e "${HOME}/.zshrc.work" && source "${HOME}/.zshrc.work"
+
 # Syntax highlighting (반드시 마지막에 로드)
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[[ -f ~/.zshrc.work ]] && source ~/.zshrc.work
