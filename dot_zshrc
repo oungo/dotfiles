@@ -70,3 +70,4 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Syntax highlighting (반드시 마지막에 로드)
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -f ~/.zshrc.work ]] && source ~/.zshrc.work
