@@ -5,6 +5,7 @@ setopt AUTO_CD
 autoload -Uz compinit && compinit
 
 alias c="claude"
+alias cc="claude --continue"
 # Aliases
 alias vim="nvim"
 alias vi="nvim"
