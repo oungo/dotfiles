@@ -1,0 +1,7 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+# mise config가 변경되면 자동으로 mise install 실행
+# config.toml hash: {{ include "private_dot_config/mise/config.toml" | sha256sum }}
+
+mise install -y
+{{ end -}}

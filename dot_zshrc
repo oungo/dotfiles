@@ -46,8 +46,6 @@ gwr() { git worktree remove "../$1" && git branch -D "$1"; }
 
 export EDITOR=/opt/homebrew/bin/nvim
 
-# iTerm2 integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 export JAVA_HOME="/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
 export ANDROID_HOME=~/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
