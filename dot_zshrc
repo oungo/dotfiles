@@ -6,6 +6,7 @@ autoload -Uz compinit && compinit
 
 alias c="claude"
 alias cc="claude --continue"
+alias ccd="claude --continue --dangerously-skip-permissions"
 # Aliases
 alias vim="nvim"
 alias vi="nvim"
@@ -63,11 +64,16 @@ eval "$(starship init zsh)"
 # zoxide (smart cd)
 eval "$(zoxide init zsh)"
 
-# fnm (node version manager)
-eval "$(fnm env --use-on-cd)"
+# mise (version manager)
+eval "$(mise activate zsh)"
 
 # Autosuggestions
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# 환경변수 로드
+set -a
+source ~/.env.local
+set +a
 
 # Work 환경 설정
 test -e "${HOME}/.zshrc.work" && source "${HOME}/.zshrc.work"
