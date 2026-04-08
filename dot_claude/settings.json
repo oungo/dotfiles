@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "WebSearch",
+      "WebFetch",
+      "Agent",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__query-docs",
+      "Bash(ls *)",
+      "Bash(ls)",
+      "Bash(pwd)",
+      "Bash(tree *)",
+      "Bash(wc *)",
+      "Bash(file *)",
+      "Bash(stat *)",
+      "Bash(du *)",
+      "Bash(find *)",
+      "Bash(grep *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(diff *)",
+      "Bash(which *)",
+      "Bash(whereis *)",
+      "Bash(type *)",
+      "Bash(echo *)",
+      "Bash(sort *)",
+      "Bash(uniq *)",
+      "Bash(cut *)",
+      "Bash(awk *)",
+      "Bash(jq *)",
+      "Bash(realpath *)",
+      "Bash(basename *)",
+      "Bash(dirname *)",
+      "Bash(env)",
+      "Bash(printenv *)",
+      "Bash(uname *)",
+      "Bash(whoami)",
+      "Bash(date *)",
+      "Bash(date)",
+      "Bash(mkdir *)",
+      "Bash(node *)",
+      "Bash(npm install*)",
+      "Bash(npx *)",
+      "Bash(yarn typecheck*)",
+      "Bash(yarn add*)",
+      "Bash(yarn test*)",
+      "Bash(yarn build*)",
+      "Bash(yarn dev*)",
+      "Bash(yarn lint*)",
+      "Bash(git -C *)",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git show*)",
+      "Bash(git branch*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git commit)",
+      "Bash(git checkout *)",
+      "Bash(git fetch *)",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(git merge *)",
+      "Bash(git tag *)",
+      "Bash(git remote add *)",
+      "Bash(git push *)",
+      "Bash(git reset *)",
+      "Bash(git reset)",
+      "Bash(gh *)"
+    ],
+    "defaultMode": "plan"
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE_PATH=$(cat | jq -r '.tool_input.file_path') && if [[ \"$FILE_PATH\" =~ \\.(ts|tsx|js|jsx|mts|cts|mjs|cjs)$ ]]; then cd \"$CLAUDE_PROJECT_DIR\" && npx prettier --write \"$FILE_PATH\"; fi || true"
+          },
+          {
+            "type": "command",
+            "command": "FILE_PATH=$(cat | jq -r '.tool_input.file_path') && if [[ \"$FILE_PATH\" =~ \\.(ts|tsx|js|jsx|mts|cts|mjs|cjs)$ ]]; then cd \"$CLAUDE_PROJECT_DIR\" && npx eslint --fix --rule 'unused-imports/no-unused-imports: off' --rule '@typescript-eslint/no-unused-vars: off' --rule 'no-unused-vars: off' \"$FILE_PATH\"; fi || true"
+          },
+          {
+            "type": "command",
+            "command": "FILE_PATH=$(cat | jq -r '.tool_input.file_path') && if [[ \"$FILE_PATH\" =~ \\.(ts|tsx)$ ]] && [ -f \"$CLAUDE_PROJECT_DIR/tsconfig.json\" ]; then cd \"$CLAUDE_PROJECT_DIR\" && yarn tsc --noEmit --incremental --tsBuildInfoFile /tmp/.tsbuildinfo 2>&1; fi"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node $HOME/.claude/hooks/block-env-read.js"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.claude/hooks/statusline.sh"
+  },
+  "enabledPlugins": {},
+  "alwaysThinkingEnabled": true,
+  "voiceEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754275520233
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    }
+  }
+}

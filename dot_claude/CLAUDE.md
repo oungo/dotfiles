@@ -1,0 +1,6 @@
+- Always respond in Korean.
+- If you encounter "Environment variable not found (BUN_AWS_PRIVATE_AUTH_TOKEN)" error, first run `get_aws_token` shell function to set the token, then retry the failed command.
+- Never use `any` type in TypeScript.
+- Before creating new functions or components, first search the existing codebase for reusable code.
+- When adding a new import, always include it atomically in a single Edit together with the code that uses it.
+- When making changes, stick strictly to the requested scope. Do not proactively refactor existing code, add new CLAUDE.md rules, or restructure components beyond what was explicitly asked for.
