@@ -23,12 +23,12 @@ PACKAGES=(
     zsh-syntax-highlighting
 )
 
-CASKS=(
-    bettertouchtool
-    font-hack-nerd-font
-    ghostty
-    karabiner-elements
-    maccy
+declare -A CASKS=(
+    [bettertouchtool]="BetterTouchTool"
+    [font-hack-nerd-font]=""
+    [ghostty]="Ghostty"
+    [karabiner-elements]="Karabiner-Elements"
+    [maccy]="Maccy"
 )
 
 MAS_APPS=(
@@ -55,8 +55,15 @@ printf '\n\nRemoving out of date packages...\n'
 brew cleanup
 
 printf '\n\nInstalling cask apps...\n'
-for cask in "${CASKS[@]}"; do
-    brew list --cask "$cask" &>/dev/null && printf "  [skip] $cask already installed\n" || brew install --cask "$cask"
+for cask in "${!CASKS[@]}"; do
+    app_name="${CASKS[$cask]}"
+    if brew list --cask "$cask" &>/dev/null; then
+        printf "  [skip] $cask already installed (brew)\n"
+    elif [ -n "$app_name" ] && [ -d "/Applications/$app_name.app" ]; then
+        printf "  [skip] $cask already installed (/Applications)\n"
+    else
+        brew install --cask "$cask"
+    fi
 done
 
 printf '\n\nInstalling App Store apps...\n'
