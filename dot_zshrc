@@ -30,7 +30,7 @@ alias gl="git pull"
 alias grbi="git rebase -i"
 
 fs() {
- rg "" --line-number | fzf \
+ rg "" --line-number | fzf --exact \
     --delimiter ':' \
     --preview 'bat --color=always --highlight-line {2} {1}' \
     --preview-window '+{2}-/2'
